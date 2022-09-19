@@ -1,0 +1,225 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("выберите задачу, введя её номер");
+            Console.WriteLine("первый уровень: 4_1 9 15 16 18 ");
+            Console.WriteLine("втрой уровень: 2 4_2 7 8 ");
+            Console.WriteLine("третий уровень: III ");
+            string input = Console.ReadLine();
+            Console.WriteLine("==========================");
+
+            if (input == "4_1")
+            {
+                ex4_1();
+            }
+
+            else if (input == "9")
+            {
+                ex9();
+            }
+
+            else if (input == "15")
+            {
+                ex15();
+            }
+
+            else if (input == "16")
+            {
+                ex16();
+            }
+
+            else if (input == "18")
+            {
+                ex18();
+            }
+
+            else if (input == "2")
+            {
+                ex2();
+            }
+
+            else if (input == "4_2")
+            {
+                ex4_2();
+            }
+
+            else if (input == "8")
+            {
+                ex8();
+            }
+        }
+
+        static int factorial(int n)
+        {
+            int f = 1;
+            for(int i=1; i <= n; i++)
+            {
+                f *= i;
+            }
+            return f;
+        }
+
+        static void ex4_1()
+        {
+            Console.WriteLine("введите любое целое число");
+            int x = Convert.ToInt32( Console.ReadLine());
+            double s = 0;
+            for (int i = 1; i < 10; i++)
+            {
+                s +=  Math.Cos(x * i) / Math.Pow(x,i-1);
+                
+            }
+            Console.WriteLine(s);
+        }
+
+        static void ex9()
+        {
+            double s = 0;
+            for(int i = 1; i < 7; i++)
+            {
+                s += Math.Pow(-1, i)* Math.Pow(5, i) /factorial(i) ;
+            }
+            Console.WriteLine(s);
+        }
+
+        static void ex15()
+        {
+            Console.WriteLine("какой член последовательност вам нужен?");
+            int c = Convert.ToInt32(Console.ReadLine());
+
+            int x = 1;
+            int y = 1;
+
+            int a = 2;
+            int b = 1;
+
+            int n;
+
+            for(int i = 1; i <= c-2; i++)
+            {
+                n = a;
+                a += x;
+                x = n;
+
+                n = b;
+                b += y;
+                y = n;
+            }
+
+            Console.WriteLine((double)a/b);
+        }
+
+        static void ex16()
+        {
+            int x = 1;
+            for(int i =2; i<=64; i++)
+            {
+
+                x += x * 2;
+            }
+
+            Console.WriteLine(x/15+" грамм");
+            Console.WriteLine(x / 15000000 + " тонн");
+        }
+
+        static void ex18()
+        {
+            Console.WriteLine("введите прошедшее время");
+            int x = Convert.ToInt32(Console.ReadLine());
+            int c= 10;
+            for(int i = 1; i <= x/3; i++)
+            {
+                c *= 2;
+            }
+            Console.WriteLine(c);
+        }
+
+        static void ex2()
+        {
+            int p = 1;
+            int x = 1;
+            while (p < 30000)
+            {
+                x += 3;
+                p *= x;
+            }
+            Console.WriteLine(x);
+        }
+
+        static void ex4_2()
+        {
+            int p = 0;
+            Console.WriteLine("введите част после запятой");
+            string n = Console.ReadLine();
+            double x = Convert.ToDouble(n)/Math.Pow(10, n.Length);
+            int s = 0;
+            double S = 1;
+            while(Math.Pow(x, s) > 0.0001)
+            {
+                s += 2;
+                S += Math.Pow(x, s);
+                
+            }
+            Console.WriteLine(S);
+        }
+
+        static void ex8()
+        {
+            int l = 10;
+            double percent = 10;
+            percent = percent / 100;
+            Console.WriteLine("введите какую часть задачи следует решить");
+            Console.WriteLine(" а            б           в");
+            string x = Console.ReadLine();
+
+            if (x == "а")
+            {
+                double s = 0; //пробежал всего
+                double L = 10;//пробежит за раз
+                for(int i = 1; i <= 7; i++)
+                {
+                    s += L;
+                    L += L * percent;
+                }
+
+                Console.WriteLine(s);
+            }
+
+            else if (x == "б")
+            {
+                double s = 0; //пробежал всего
+                double L = 10;//пробежит за раз
+                int t = 0;//кол-во дней
+                while(s<100)
+                {
+                    s += L;
+                    L += L * percent;
+                    t++;
+                }
+
+                Console.WriteLine(t);
+            }
+
+            else
+            {
+                double s = 0; //пробежал всего
+                double L = 10;//пробежит за раз
+                int t = 0;//кол-во дней
+                while (L < 20)
+                {
+                    s += L;
+                    L += L * percent;
+                    t++;
+                }
+
+                Console.WriteLine(t);
+            }
+        }
+    }
+}
